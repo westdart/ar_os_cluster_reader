@@ -1,0 +1,5 @@
+---
+ar_os_cluster_reader_assertions:
+  - "ar_os_cluster_reader_group is defined"
+  - "ar_os_cluster_reader_group is not none"
+  - "ar_os_cluster_reader_group | length"

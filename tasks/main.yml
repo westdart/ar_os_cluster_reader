@@ -1,9 +1,7 @@
 ---
-- name: "Assert ..."
+- name: "Assertions: ar_os_cluster_reader"
   assert:
-    that:
-      - "ar_os_cluster_reader_group is not none"
-    msg: "Must include required group: ar_os_cluster_reader_group"
+    that: "{{ ar_os_cluster_reader_assertions }}"
 
 - name: Get clusterrolebindings
   command: oc get clusterrolebindings -o json
