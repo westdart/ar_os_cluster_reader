@@ -1,0 +1,24 @@
+---
+- name: "Assert ..."
+  assert:
+    that:
+      - "ar_os_cluster_reader_group is not none"
+    msg: "Must include required group: ar_os_cluster_reader_group"
+
+- name: Get clusterrolebindings
+  command: oc get clusterrolebindings -o json
+  register: clusterrolebindings_out
+  changed_when: false
+
+- name: Setup queries for cluster-reader
+  set_fact:
+    subjects_query: "items[?roleRef.name == 'cluster-reader'].subjects"
+    group_query: "[?kind == 'Group'].name"
+
+- name: Find groups with cluster-reader
+  set_fact:
+    groups_matched: "{{ clusterrolebindings_out.stdout | from_json | json_query(subjects_query) | flatten | json_query(group_query) }}"
+
+- name: Assign cluster-reader to group
+  command: oc adm policy add-cluster-role-to-group cluster-reader {{ ar_os_cluster_reader_group }}
+  when: 'ar_os_cluster_reader_group not in groups_matched'
