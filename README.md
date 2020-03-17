@@ -22,7 +22,7 @@ The following details:
 ### Parameters:
 | Variable                   | Description                     | Default     |
 | --------                   | -----------                     | -------     |
-| ar_os_cluster_reader_group | The group to ascibe the role to | null (none) |
+| ar_os_cluster_reader_group | The group to ascribe the role to | null (none) |
 
 
 ### Defaults
@@ -30,6 +30,8 @@ The following details:
 | --------                        | -----------                              | -------                               |
 | ar_os_cluster_reader_assertions | List of assertions made before execution | ar_os_cluster_reader_group is present |
 
+### Secrets
+The following variables should be provided through an encrypted source:
 
 ## Dependencies
 None
